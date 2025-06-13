@@ -9,12 +9,20 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-Explain how your project works
+A user turns on the chip. Between 0 to ~5 seconds an LED will light up, this LED marks the active window to then press a different button. The time between the LED first lighting up and the button pressed will be recorded. After the press, the light turns off and a 7 segment display will output the time in milliseconds (shown between 0 to 9999 ms). If the button was pressed before the LED turns on, the 7-segment display will display "Err" (Error).
 
 ## How to test
 
-Explain how to use your project
+(Work in Progress)
+
+There are 3 moving parts to test:
+
+- The first input where the program randomly decides how long to wait before turning on the LED. This will be done by turning on the program and observing the turn on interval to make sure it is random.
+- The timer to track how it has been since the LED turns on. This will be done through verifying the 7-segment LED display correctly tracks the time.
+- The final press where the LED turns off and the stopwatch pauses, indicating the final time of the test. This will be done through completing the trial as shown in "How it works".
 
 ## External hardware
 
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+(Work in Progress)
+
+Most likely a button, an LED and a 4-digit 7 segment display
