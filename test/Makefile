@@ -5,7 +5,13 @@
 SIM ?= icarus
 TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(PWD)/../src
-PROJECT_SOURCES = project.v
+PROJECT_SOURCES = \
+  tt_um_DelosReyesJordan_HDL.v \
+  reaction_time_top.v \
+  reaction_fsm.v \
+  random_delay.v \
+  timer.v \
+  seg7_driver.v
 
 ifneq ($(GATES),yes)
 
