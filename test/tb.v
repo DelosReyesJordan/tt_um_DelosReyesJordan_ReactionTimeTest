@@ -24,9 +24,9 @@ module tb ();
   wire [7:0] uio_out;
   wire [7:0] uio_oe;
 
-  // Clock generation: 10ns period (100MHz)
+   // Clock generation: 40ns period (25MHz)
   initial clk = 0;
-  always #5 clk = ~clk;
+  always #20 clk = ~clk;
 
   // Initial conditions and reset
   initial begin
