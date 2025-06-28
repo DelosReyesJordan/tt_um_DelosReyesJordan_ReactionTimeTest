@@ -1,4 +1,4 @@
-module reaction_time_top(
+module tt_um_DelosReyesJordan_HDL (
     input clk,
     input start_btn,
     input react_btn,
