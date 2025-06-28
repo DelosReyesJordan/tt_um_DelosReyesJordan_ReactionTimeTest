@@ -7,10 +7,10 @@ module tt_um_DelosReyesJordan_ReactionTimeTest (
     output [6:0] seg,
     output [3:0] an
 );
-    wire delay_done, start_timer, stop_timer, show_error, finished;
+    wire delay_done, start_timer, stop_timer, show_error, done;
     wire [13:0] ms_time;
 
-    // Since FSM state is internal, to use state in random_delay start, we expose state as output
+    // Expose FSM state for controlling random delay start
     wire [2:0] fsm_state;
 
     reaction_fsm fsm(
@@ -24,14 +24,14 @@ module tt_um_DelosReyesJordan_ReactionTimeTest (
         .start_timer(start_timer),
         .stop_timer(stop_timer),
         .show_error(show_error),
-        .finished(finished),
-        .state_out(fsm_state)  // added state output for external usage
+        .done(done),               // Fixed from finished to done
+        .state_out(fsm_state)
     );
 
     random_delay delay(
         .clk(clk),
         .reset(reset_btn),
-        .start(fsm_state == 3'b001),  // WAIT state code (from reaction_fsm)
+        .start(fsm_state == 3'b001),  // WAIT state (okay for now)
         .done(delay_done)
     );
 
