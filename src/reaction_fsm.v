@@ -3,7 +3,8 @@ module reaction_fsm(
     input delay_done, 
     input [13:0] elapsed_time, // max 9999
     output reg led,
-    output reg start_timer, stop_timer, show_error, done
+    output reg start_timer, stop_timer, show_error, done,
+    output reg [2:0] state_out  // new output for current FSM state
 );
 
     // State encoding
@@ -22,6 +23,8 @@ module reaction_fsm(
             state <= IDLE;
         else
             state <= next;
+
+        state_out <= state;  // update state_out every clock cycle
     end
 
     // Next state logic and outputs
