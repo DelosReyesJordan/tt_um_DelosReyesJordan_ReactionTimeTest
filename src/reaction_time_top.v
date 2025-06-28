@@ -1,4 +1,4 @@
-module tt_um_DelosReyesJordan_HDL (
+module tt_um_DelosReyesJordan_ReactionTimeTest (
     input clk,
     input start_btn,
     input react_btn,
