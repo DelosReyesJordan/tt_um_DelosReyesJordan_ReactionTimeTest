@@ -13,17 +13,35 @@ module tb ();
     #1;
   end
 
-  // Wire up the inputs and outputs:
+  // Clock and reset signals
   reg clk;
   reg rst_n;
   reg ena;
   reg [7:0] ui_in;
   reg [7:0] uio_in;
+
   wire [7:0] uo_out;
   wire [7:0] uio_out;
   wire [7:0] uio_oe;
 
-  // Replace tt_um_example with your module name:
+  // Clock generation: 10ns period (100MHz)
+  initial clk = 0;
+  always #5 clk = ~clk;
+
+  // Initial conditions and reset
+  initial begin
+    // Hold reset low initially
+    rst_n = 0;
+    ena = 1;
+    ui_in = 8'b0;
+    uio_in = 8'b0;
+
+    // Release reset after some time
+    #100;
+    rst_n = 1;
+  end
+
+  // Instantiate your top-level module
   tt_um_DelosReyesJordan_HDL user_project (
       .ui_in  (ui_in),    // Dedicated inputs
       .uo_out (uo_out),   // Dedicated outputs
