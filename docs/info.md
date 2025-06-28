@@ -17,12 +17,13 @@ A user turns on the chip by pressing the START button. Between 0 to ~5 seconds a
 
 There are 3 moving parts to test:
 
-- The first input where the program randomly decides how long to wait before turning on the LED. This will be done by turning on the program and observing the turn on interval to make sure it is random.
+- The START button is where where the program randomly decides how long to wait before turning on the LED. This will be done by turning on the program and observing the turn on interval to make sure it is random.
 - The timer to track how it has been since the LED turns on. This will be done through verifying the 7-segment LED display correctly tracks the time.
-- The final press where the LED turns off and the stopwatch pauses, indicating the final time of the test. This will be done through completing the trial as shown in "How it works".
+- The final press on the REACT button where the LED turns off and the stopwatch pauses, indicating the final time of the test. This will be done through completing the trial as shown in "How it works".
+- Resetting the time is done through the RESET button.
 
 ## External hardware
 
-(Work in Progress)
-
-Most likely a button, an LED and a 4-digit 7 segment display
+- a button
+- an LED
+- a 4-digit 7 segment display
