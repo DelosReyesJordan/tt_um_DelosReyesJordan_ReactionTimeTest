@@ -46,4 +46,7 @@ module tt_um_DelosReyesJordan_HDL (
     assign uio_out[7:4] = 4'b0000;
     assign uio_oe[7:4]  = 4'b0000;
 
+    // Prevent unused input warnings
+    wire unused = (&uio_in) & ena;
+
 endmodule
