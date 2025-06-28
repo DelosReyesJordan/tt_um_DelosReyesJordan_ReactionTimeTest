@@ -26,12 +26,12 @@ module seg7_driver(
         seg_lut[11] = 7'b0101111; // r (segments e and g)
     end
 
-    // Extract digits - combinational logic using wire instead of reg
+    // Extract digits with explicit 4-bit truncation
     wire [3:0] digits [3:0];
-    assign digits[0] = value % 10;
-    assign digits[1] = (value / 10) % 10;
-    assign digits[2] = (value / 100) % 10;
-    assign digits[3] = (value / 1000) % 10;
+    assign digits[0] = (value % 10)[3:0];
+    assign digits[1] = ((value / 10) % 10)[3:0];
+    assign digits[2] = ((value / 100) % 10)[3:0];
+    assign digits[3] = ((value / 1000) % 10)[3:0];
 
     // Refresh counter and digit selector
     always @(posedge clk or posedge reset) begin
@@ -49,6 +49,8 @@ module seg7_driver(
     always @(*) begin
         an = 4'b1111;
         seg = 7'b1111111; // all off
+        digit = 4'd0;     // ✅ prevent inferred latch
+
         if (show_error) begin
             case (digit_select)
                 2'd0: begin seg = 7'b1111111; an = 4'b1110; end // blank
@@ -64,5 +66,4 @@ module seg7_driver(
         end
     end
 endmodule
-
 
