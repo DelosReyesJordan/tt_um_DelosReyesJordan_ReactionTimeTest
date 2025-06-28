@@ -13,7 +13,12 @@ project:
   top_module:  "tt_um_DelosReyesJordan_HDL"
 
   source_files:
-    - "project.v"
+    - "tt_um_DelosReyesJordan_HDL.v"
+    - "reaction_time_top.v"
+    - "reaction_fsm.v"
+    - "random_delay.v"
+    - "timer.v"
+    - "seg7_driver.v"
 
 # Pinout
 pinout:
@@ -46,8 +51,6 @@ pinout:
   uio[5]: ""
   uio[6]: ""
   uio[7]: ""
-
-yaml_version: 6
 
 # Do not change!
 yaml_version: 6
