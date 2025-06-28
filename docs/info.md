@@ -9,7 +9,7 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-A user turns on the chip. Between 0 to ~5 seconds an LED will light up, this LED marks the active window to then press a different button. The time between the LED first lighting up and the button pressed will be recorded. After the press, the light turns off and a 7 segment display will output the time in milliseconds (shown between 0 to 9999 ms). If the button was pressed before the LED turns on, the 7-segment display will display "Err" (Error).
+A user turns on the chip by pressing the START button. Between 0 to ~5 seconds an LED will light up, this LED marks the active window to then press the REACT button. The time between the LED first lighting up and the button pressed will be recorded. After the press, the light turns off and a 7 segment display will output the time in milliseconds (shown between 0 to 9999 ms). If the REACT button was pressed before the LED turns on, the 7-segment display will display "Err" (Error). The time accumulates everytime a successful trial has been performed, only pressing the RESET button will the time displayed reset.
 
 ## How to test
 
