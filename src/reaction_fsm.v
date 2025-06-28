@@ -3,39 +3,35 @@ module reaction_fsm(
     input delay_done, 
     input [13:0] elapsed_time, // max 9999
     output reg led,
-    output reg start_timer, stop_timer, show_error, finished,
-    output reg [2:0] state_out // optional: for debug or external observation
+    output reg start_timer, stop_timer, show_error, done
 );
 
-    // State encoding with localparam
-    localparam IDLE  = 3'b000,
-               WAIT  = 3'b001,
-               READY = 3'b010,
-               TIMING= 3'b011,
-               DONE  = 3'b100,
-               ERROR = 3'b101;
+    // State encoding
+    parameter IDLE  = 3'b000,
+              WAIT  = 3'b001,
+              READY = 3'b010,
+              TIMING= 3'b011,
+              DONE  = 3'b100,
+              ERROR = 3'b101;
 
     reg [2:0] state, next;
 
-    // State register (sequential logic)
-    always @(posedge clk or posedge reset) begin
+    // State register with synchronous reset
+    always @(posedge clk) begin
         if (reset)
             state <= IDLE;
         else
             state <= next;
-
-        state_out <= state; // optional: for debug
     end
 
-    // Next state logic and outputs (combinational logic)
+    // Next state logic and outputs
     always @(*) begin
-        // Default outputs
         next = state;
         led = 0;
         start_timer = 0;
         stop_timer = 0;
         show_error = 0;
-        finished = 0;
+        done = 0;
 
         case (state)
             IDLE: begin
@@ -65,7 +61,7 @@ module reaction_fsm(
             end
 
             DONE: begin
-                finished = 1;
+                done = 1;
                 if (start_btn)
                     next = IDLE;
             end
@@ -76,11 +72,8 @@ module reaction_fsm(
                     next = IDLE;
             end
 
-            default: begin
-                next = IDLE;
-            end
+            default: next = IDLE;
         endcase
     end
 
 endmodule
-
