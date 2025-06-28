@@ -1,4 +1,4 @@
-module reaction_wrapper (
+module tt_um_DelosReyesJordan_HD (
     input  wire [7:0] ui_in,     // general inputs
     output wire [7:0] uo_out,    // general outputs
     input  wire [7:0] uio_in,    // not used
