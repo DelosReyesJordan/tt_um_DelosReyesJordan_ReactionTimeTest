@@ -9,7 +9,6 @@ module seg7_driver(
     reg [1:0] digit_select;
     reg [19:0] refresh_counter;
 
-    // 7-seg LUT for 0-9, E and r
     reg [6:0] seg_lut [0:11];
     initial begin
         seg_lut[0]  = 7'b1000000; // 0
@@ -26,14 +25,17 @@ module seg7_driver(
         seg_lut[11] = 7'b0101111; // r
     end
 
-    // Extract digits using masking to ensure 4-bit width
-    wire [3:0] digits [3:0];
-    assign digits[0] = (value % 10) & 4'hF;
-    assign digits[1] = ((value / 10) % 10) & 4'hF;
-    assign digits[2] = ((value / 100) % 10) & 4'hF;
-    assign digits[3] = ((value / 1000) % 10) & 4'hF;
+    wire [3:0] d0 = value % 10;
+    wire [3:0] d1 = (value / 10) % 10;
+    wire [3:0] d2 = (value / 100) % 10;
+    wire [3:0] d3 = (value / 1000) % 10;
 
-    // Refresh counter and digit selector
+    wire [3:0] digits [3:0];
+    assign digits[0] = d0;
+    assign digits[1] = d1;
+    assign digits[2] = d2;
+    assign digits[3] = d3;
+
     always @(posedge clk or posedge reset) begin
         if (reset) begin
             refresh_counter <= 0;
@@ -45,12 +47,9 @@ module seg7_driver(
         end
     end
 
-    // Segment and anode control
     always @(*) begin
         an = 4'b1111;
         seg = 7'b1111111;
-        digit = 4'd0;  // Prevent latch inference
-
         if (show_error) begin
             case (digit_select)
                 2'd0: begin seg = 7'b1111111; an = 4'b1110; end // blank
